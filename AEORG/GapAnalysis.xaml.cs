@@ -54,18 +54,6 @@ namespace AEORG
 
         private async void GapAnalysis_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                ResponseFromApp.Text = BackendRunner.RunTool(ConfigurationManager.ExePath, ConfigurationManager.DefaultInputDirectory);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to start AEORG.exe", "ERROR");
-            }
-        }
-
-        private void RunGapAnalysisINSCreate_Click(object sender, RoutedEventArgs e)
-        {
             string fullPath = System.IO.Path.Combine(ConfigurationManager.DefaultDirectory, ConfigurationManager.DefaultInputDirectory);
 
             string content = "GAP_ANALYSIS  PROJ_DIR = " + ProjectDirectoryText.Text + " &\r\n" + "REF_DIR = " + ReferenceDirectoryText.Text;
@@ -78,6 +66,14 @@ namespace AEORG
                 MessageBox.Show("Error in creating file" + ex.Message, "Error");
             }
             MessageBox.Show("INS File created!");
+            try
+            {
+                ResponseFromApp.Text = BackendRunner.RunTool(ConfigurationManager.ExePath, ConfigurationManager.DefaultInputDirectory);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to start AEORG.exe", "ERROR");
+            }
         }
     }
 }

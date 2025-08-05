@@ -24,22 +24,40 @@ namespace AEORG
         public MainWindow()
         {
             InitializeComponent();
-            CommandContent.Content = new GapAnalysis();
         }
-        private void CommandSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AddCommand_Click(object sender, RoutedEventArgs e)
         {
-            var selected = (CommandSelector.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            var selectedCommand = (CommandSelector.SelectedItem as ComboBoxItem)?.Content?.ToString();
 
-            switch (selected)
+            if (string.IsNullOrWhiteSpace(selectedCommand) || selectedCommand == "Please select a command")
             {
-                case "Gap Analysis":
-                    CommandContent.Content = new GapAnalysis();
-                    break;
+                MessageBox.Show("Please select a valid command before adding.");
+                return;
+            }
+            if (CommandSelector.SelectedItem is ComboBoxItem selectedItem)
+            {
+                string command = selectedItem.Content.ToString();
 
-                case "Compare PDFs":
-                    CommandContent.Content = new ComparePDFs();
-                    break;
+                UserControl controlToAdd = null;
+
+                switch (command)
+                {
+                    case "Gap Analysis":
+                        controlToAdd = new GapAnalysis();
+                        break;
+
+                    case "Compare PDFs":
+                        controlToAdd = new ComparePDFs(); // You need to define this
+                        break;
+
+                    default:
+                        MessageBox.Show("Please select a valid command.");
+                        return;
+                }
+
+                CommandsPanel.Children.Add(controlToAdd);
             }
         }
+
     }
 }
