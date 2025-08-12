@@ -20,14 +20,17 @@ namespace AEORG
     /// <summary>
     /// Interaction logic for GapAnalysis.xaml
     /// </summary>
-    public partial class GapAnalysis : UserControl
+    public partial class GapAnalysis : UserControl, IRunnableCommand
     {
         public GapAnalysis()
         {
             InitializeComponent();
         }
 
-
+        public void Run()
+        {
+            GapAnalysis_Click(this, null);
+        }
         private void BrowseProject_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFolderDialog();

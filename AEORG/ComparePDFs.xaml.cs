@@ -18,11 +18,17 @@ namespace AEORG
     /// <summary>
     /// Interaction logic for ComparePDFs.xaml
     /// </summary>
-    public partial class ComparePDFs : UserControl
+    public partial class ComparePDFs : UserControl, IRunnableCommand
     {
         public ComparePDFs()
         {
             InitializeComponent();
         }
+        
+        public void Run()
+        {
+            throw new NotImplementedException("Run method is not implemented for ComparePDFs.");
+        }
+
     }
 }

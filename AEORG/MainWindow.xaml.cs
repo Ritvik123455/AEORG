@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Diagnostics;
 using System.IO;
-using System.IO;
 using System.Printing;
 using System.Text;
 using System.Windows;
@@ -56,6 +55,13 @@ namespace AEORG
                 }
 
                 CommandsPanel.Children.Add(controlToAdd);
+            }
+        }
+        public void RunAll_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var control in CommandsPanel.Children.OfType<IRunnableCommand>())
+            {
+                control.Run();
             }
         }
 
